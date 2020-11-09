@@ -1,5 +1,5 @@
 // require the mongoose package from the connection pool
-const mongoose = require('../connection');
+const mongoose = require('../db/connection');
 
 // make a new schema with 2 properties, and assign it to a variable
 const UserSchema = new mongoose.Schema({

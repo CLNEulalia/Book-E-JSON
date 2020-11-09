@@ -10,6 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 /* START CONTROLLERS HERE */
 const bookmarksController = require('./controllers/bookmarks');
 app.use('/api/bookmarks/', bookmarksController);
+
+const usersController = require('./controllers/users');
+app.use('/api/users/', usersController);
 /* END CONTROLLERS HERE */
 
 app.set('port', process.env.PORT || 8000);
