@@ -8,6 +8,7 @@ const Bookmark = require('../models/bookmark');
 router.get('/', (req, res, next) => {
   // 1. Get all of the bookmarks from the DB
   Bookmark.find({})
+    .populate('owner')
     // 2. Send them back to the client as JSON
     .then((bookmarks) => res.json(bookmarks))
     // 3. If there's an error pass it on!
@@ -18,6 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   // 1. Find the Bookmark by its unique ID
   Bookmark.findById(req.params.id)
+    .populate('owner')
     // 2. Send it back to the client as JSON
     .then((bookmark) => res.json(bookmark))
     // 3. If there's an error pass it on!
