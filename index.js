@@ -23,6 +23,12 @@ const usersController = require('./controllers/users');
 app.use('/api/users/', usersController);
 /* END CONTROLLERS HERE */
 
+app.use((err, req, res, next) => {
+  const statusCode = res.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(statusCode).send(message);
+});
+
 app.set('port', process.env.PORT || 8000);
 
 app.listen(app.get('port'), () => {
