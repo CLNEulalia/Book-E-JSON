@@ -1,17 +1,20 @@
-// Require the model which has a connection to the database
-const Bookmark = require('../models/bookmark');
-// Require a json file which contains some dummy data
-const seedData = require('./seeds.json');
+const mongoose = require('./connection');
 
-// Remove any preexisting data
+const Bookmark = require('../models/Bookmark');
+const User = require('../models/User');
+const bookmarkseeds = require('./seeds.json');
+
 Bookmark.deleteMany({})
+  .then(() => User.deleteMany({}))
   .then(() => {
-    // Insert the dummy data
-    return Bookmark.collection.insertMany(seedData);
+    return User.create({ email: 'fake@email.com', name: 'Fake Person' })
+      .then((user) =>
+        bookmarkseeds.map((bookmark) => ({ ...bookmark, owner: user._id }))
+      )
+      .then((bookmarks) => Bookmark.insertMany(bookmarks));
   })
   .then(console.log)
   .catch(console.error)
   .finally(() => {
-    // Close the connection to Mongo
     process.exit();
   });
