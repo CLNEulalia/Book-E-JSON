@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 
 /* START CONTROLLERS HERE */
-
+const bookmarksController = require('./controllers/bookmarks');
+app.use('/api/bookmarks/', bookmarksController);
 /* END CONTROLLERS HERE */
 
 app.set('port', process.env.PORT || 8000);
