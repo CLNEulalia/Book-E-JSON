@@ -44,4 +44,15 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// Delete: Delete a resource in the DB
+
+router.delete('/:id', (req, res, next) => {
+  // 1. Find the resource to delete
+  Bookmark.findOneAndDelete({ _id: req.params.id })
+    // 2. If the delete is successful, send back the record that was inserted
+    .then((bookmark) => res.json(bookmark))
+    // 3. If there was an error, pass it on!
+    .catch(next);
+});
+
 module.exports = router;
