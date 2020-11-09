@@ -34,4 +34,14 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
+// Update: Update a resource in the DB and return the update
+router.put('/:id', (req, res, next) => {
+  // 1. Use the data in the req body to an existing bookmark
+  Bookmark.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    // 2. If the update is successful, send back the record that was inserted
+    .then((bookmark) => res.json(bookmark))
+    // 3. If there was an error, pass it on!
+    .catch(next);
+});
+
 module.exports = router;
