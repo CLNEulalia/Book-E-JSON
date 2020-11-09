@@ -14,4 +14,24 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+// Show: Get a Bookmark by ID
+router.get('/:id', (req, res, next) => {
+  // 1. Find the Bookmark by its unique ID
+  Bookmark.findById(req.params.id)
+    // 2. Send it back to the client as JSON
+    .then((bookmark) => res.json(bookmark))
+    // 3. If there's an error pass it on!
+    .catch(next);
+});
+
+// Create: Create a new resource in the DB and return it
+router.post('/', (req, res, next) => {
+  // 1. Use the data in the req body to create a new bookmark
+  Bookmark.create(req.body)
+    // 2. If the create is successful, send back the record that was inserted
+    .then((bookmark) => res.json(bookmark))
+    // 3. If there was an error, pass it on!
+    .catch(next);
+});
+
 module.exports = router;
