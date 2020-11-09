@@ -7,6 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.redirect('/api/bookmarks');
+});
+
 /* START CONTROLLERS HERE */
 const bookmarksController = require('./controllers/bookmarks');
 app.use('/api/bookmarks/', bookmarksController);
