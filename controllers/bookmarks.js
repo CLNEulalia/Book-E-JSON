@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // import the bookmark model
-const Bookmark = require('../models/Bookmark');
+const Bookmark = require('../models/bookmark');
 
 // Index: GET all the bookmarks
 router.get('/', (req, res, next) => {
