@@ -1,7 +1,7 @@
 const mongoose = require('./connection');
 
-const Bookmark = require('../models/Bookmark');
-const User = require('../models/User');
+const Bookmark = require('../models/bookmark');
+const User = require('../models/user');
 const bookmarkseeds = require('./seeds.json');
 
 Bookmark.deleteMany({})
